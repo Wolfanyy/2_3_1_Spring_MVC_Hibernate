@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <script src="/resources/js/editMode.js" defer></script>
+</head>
+<body>
+<div>
+    <form th:action="@{/users}" th:object="${users}" method="post">
+        <table>
+            <thead>
+            <tr>
+                <th><label for="name">name</label></th>
+                <th><label for="age">age</label></th>
+                <th><label for="email">email</label></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user: ${users}">
+                <td><input type="text" id="name" name="name" class="user-field" th:value="${user.name}" disabled
+                           required></td>
+                <td><input type="number" id="age" name="age" class="user-field" th:value="${user.age}" disabled
+                           required></td>
+                <td><input type="text" id="email" name="email" class="user-field" th:value="${user.email}" disabled
+                           required></td>
+                <td class="actions">
+                    <button type="button" class="button-edit">Edit</button>
+                </td>
+                <td class="actions">
+                    <button type="submit" class="button-delete">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a href="users/newUser" class="button-link">Add User</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>
