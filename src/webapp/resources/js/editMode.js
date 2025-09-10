@@ -9,8 +9,13 @@ editButtons.forEach(button => {
         if (button.textContent === 'Edit') {
             fields.forEach(field => {
                 field.disabled = false;
-            })
-            button.textContent = "Save";
+                editButtons.forEach(btn => {
+                    if (btn !== button) {
+                        btn.disabled = true;
+                    }
+                });
+            });
+            button.textContent = 'Save';
         } else {
             button.type = 'submit';
         }

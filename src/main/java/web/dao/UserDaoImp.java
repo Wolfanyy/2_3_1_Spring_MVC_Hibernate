@@ -25,6 +25,9 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public void delete(User user) {
+        if (!em.contains(user)) {
+            user = em.merge(user);
+        }
         em.remove(user);
     }
 
@@ -35,6 +38,6 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public List<User> findAll() {
-        return em.createQuery("select distinct u from User u", User.class).getResultList();
+        return em.createQuery("select u from User u", User.class).getResultList();
     }
 }

@@ -12,8 +12,11 @@ import java.util.List;
 @Service
 public class UserServiceImp implements UserService {
 
-    @Autowired
-    private UserDao userDao;
+    private final UserDao userDao;
+
+    public UserServiceImp(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Transactional
     @Override
@@ -24,7 +27,7 @@ public class UserServiceImp implements UserService {
     @Transactional
     @Override
     public void updateUser(User user) {
-        if (user.getId() != null) {
+        if (user.getId() != null && userDao.findById(user.getId()) != null) {
             userDao.update(user);
         }
     }
@@ -33,7 +36,9 @@ public class UserServiceImp implements UserService {
     @Override
     public void deleteUser(Long id) {
         User user = userDao.findById(id);
-        userDao.delete(user);
+        if (user != null) {
+            userDao.delete(user);
+        }
     }
 
     @Transactional(readOnly = true)

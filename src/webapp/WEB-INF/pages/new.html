@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-    <form th:action="@{/users/newUser}" th:object="${user}" method="post">
+    <form th:action="@{/users/new}" th:object="${user}" method="post">
         <table>
             <thead>
             <tr>
@@ -24,7 +24,7 @@
                 </td>
                 <td>
                     <input type="number" id="age" th:field="*{age}" required
-                          min="14" max="100"/>
+                           min="14" max="100"/>
                 </td>
                 <td>
                     <input type="email" id="email" th:field="*{email}" required/>
